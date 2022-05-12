@@ -1,6 +1,6 @@
 import Editor from "@monaco-editor/react";
-import { Form } from "../Form";
-import { FormSpec } from "../types";
+import { Form } from "../src/Form";
+import { FormSpec } from "../src/types";
 import { useState } from "react";
 import { debounce } from "lodash";
 
@@ -171,7 +171,7 @@ const formSpec: FormSpec = {
   },
 };
 
-export function FormExampleDemo() {
+export function Example() {
   const [data, setData] = useState(formSpec);
 
   const handleChange = debounce((value: any) => {
@@ -183,19 +183,27 @@ export function FormExampleDemo() {
   }, 1000);
 
   return (
-    <div css={{ display: "flex" }}>
-      <div css={{ flex: 1 }}>
-        <Editor
-          height="500vh"
-          defaultLanguage="json"
-          defaultValue={JSON.stringify(data, null, 2)}
-          options={{ minimap: { enabled: false } }}
-          onChange={handleChange}
-        />
-      </div>
-      <div css={{ flex: 1, padding: 20 }}>
-        <Form formSpec={data} />
+    <div>
+      <h1>完整表单</h1>
+      <div css={{ display: "flex" }}>
+        <div css={{ flex: 1 }}>
+          <Editor
+            height="500vh"
+            defaultLanguage="json"
+            defaultValue={JSON.stringify(data, null, 2)}
+            options={{ minimap: { enabled: false } }}
+            onChange={handleChange}
+          />
+        </div>
+        <div css={{ flex: 1, padding: 20 }}>
+          <Form formSpec={data} />
+        </div>
       </div>
     </div>
   );
 }
+
+export const config = {
+  path: "/complete-form",
+  label: "完整表单",
+};

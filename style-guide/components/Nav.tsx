@@ -11,7 +11,6 @@ const navItemStyles = css({
 });
 
 const asideStyles = css({
-  width: "240px",
   opacity: 0.7,
   overflowY: "scroll",
 });
@@ -25,19 +24,13 @@ const getActiveLinkStyles = (theme: string) => ({
   background: theme === "dark" ? "#545659" : "#e07070",
 });
 
-const group1 = ["/modal", "/popover", "/tooltip", "/portal"];
-const group2 = ["/checkbox", "/autocomplete", "/select", "/input", "/with-multi-select"];
-
-const pickOtherGroupFromRouteConfig = (routesConfig: RouteProps[], groupList: string[]) =>
-  routesConfig.filter((i) => !groupList.includes(i?.path as string));
-
 export const Nav = ({ routesConfig }: { routesConfig: RouteProps[] }) => {
   const location = useLocation();
   const groups = [
     {
       name: "examples",
       display: "Examples",
-      routes: pickOtherGroupFromRouteConfig(routesConfig, [...group1, ...group2]),
+      routes: routesConfig,
     },
   ];
 
@@ -82,7 +75,7 @@ export const Nav = ({ routesConfig }: { routesConfig: RouteProps[] }) => {
                     routeConfig.path === location.pathname ? getActiveLinkStyles(theme) : {},
                   ])}
                 >
-                  {routeConfig.path.split("/")[1]}
+                  {routeConfig.label || routeConfig.path.split("/")[1]}
                 </Link>
               ))}
             </section>

@@ -14,12 +14,12 @@ const containerStyles = css({
   top: 0,
   right: 0,
   bottom: 0,
-  display: "flex",
+  // display: "flex",
 });
 
 const mainStyles = css({
   padding: "1rem",
-  flex: 1,
+  // flex: 1,
   overflow: "scroll",
 });
 

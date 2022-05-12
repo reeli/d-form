@@ -1,20 +1,15 @@
-import { map, startsWith } from "lodash";
+import { startsWith } from "lodash";
 
-const req = (require as any).context("../src", true, /\/__examples__\/.*.tsx$/);
+const req = (require as any).context("../examples", true, /.*.tsx$/);
 
-const filterDemosByKeys = (keys: string[]) => {
-  return keys.filter((key: string) => {
-    return key.indexOf("Demo") > -1;
-  });
-};
+const paths = req.keys().filter((key: string) => !startsWith(key, "examples/"));
 
-const paths = req.keys().filter((key: string) => !startsWith(key, "src/"));
+export const routesConfig: any[] = paths.map((key: string, idx: string) => {
+  const { Example, config } = req(key);
 
-const renderComponent = (Examples: any[]) => [map(Examples, (Example: any, idx: number) => <Example key={idx} />)];
-
-export const routesConfig: any[] = filterDemosByKeys(paths).map((key: string) => {
   return {
-    path: `/${key.split("/").reverse()[2]}`,
-    element: renderComponent(req(key)),
+    path: config.path || `${key.split(".")[1]}`,
+    element: <Example key={idx} />,
+    label: config.label
   };
 });
