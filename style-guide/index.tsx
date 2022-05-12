@@ -1,4 +1,3 @@
-import { render } from "react-dom";
 import { BrowserRouter as Router, Routes } from "react-router-dom";
 import { Nav } from "./components/Nav";
 import { getRouterRoutes } from "./getRouterRoutes";
@@ -7,6 +6,7 @@ import { ThemeContext } from "./ThemeContext";
 import { css, Global } from "@emotion/react";
 import { useState } from "react";
 import { Button } from "@material-ui/core";
+import { createRoot } from "react-dom/client";
 
 const containerStyles = css({
   position: "absolute",
@@ -64,4 +64,5 @@ const App = () => {
   );
 };
 
-render(<App />, document.getElementById("app"));
+const root = createRoot(document.getElementById("app")!);
+root.render(<App />);
