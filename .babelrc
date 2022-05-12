@@ -1,0 +1,27 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": true
+        }
+      }
+    ],
+    ["@babel/preset-typescript"],
+    [
+      "@emotion/babel-preset-css-prop",
+      {
+        "labelFormat": "[local]",
+        "sourceMap": true
+      }
+    ]
+  ],
+  "plugins": [
+    "@emotion/babel-plugin",
+    "babel-plugin-typescript-iife-enum",
+    "@babel/plugin-transform-typescript",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread"
+  ]
+}

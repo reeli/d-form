@@ -1,0 +1,9 @@
+.idea
+node_modules
+*.js
+*.jsx
+public
+*.js.map
+coverage/
+.tmp
+!custom-react/jsx-runtime.js

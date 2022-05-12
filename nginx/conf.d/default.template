@@ -1,0 +1,17 @@
+gzip_disable ".";
+
+server {
+  listen 80;
+  root /etc/nginx/html;
+  server_tokens off;
+
+  location /__built__/ {
+    expires 30d;
+    root /usr/share/nginx/html;
+  }
+
+  location / {
+    try_files $uri $uri/ /index.html;
+    expires 0d;
+  }
+}
