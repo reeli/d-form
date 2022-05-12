@@ -80,4 +80,5 @@ export function Example() {
 export const config = {
   path: "/simple-form",
   label: "简单表单",
+  order: 1
 };

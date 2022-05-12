@@ -28,8 +28,8 @@ export const Nav = ({ routesConfig }: { routesConfig: RouteProps[] }) => {
   const location = useLocation();
   const groups = [
     {
-      name: "examples",
-      display: "Examples",
+      name: "d-form",
+      display: "D-Form",
       routes: routesConfig,
     },
   ];
@@ -62,22 +62,24 @@ export const Nav = ({ routesConfig }: { routesConfig: RouteProps[] }) => {
               >
                 {group.display}
               </p>
-              {map(group.routes, (routeConfig: any, key: number) => (
-                <Link
-                  to={routeConfig.path}
-                  key={key}
-                  css={css([
-                    navItemStyles,
-                    linkStyles,
-                    {
-                      ":hover,:focus": getActiveLinkStyles(theme),
-                    },
-                    routeConfig.path === location.pathname ? getActiveLinkStyles(theme) : {},
-                  ])}
-                >
-                  {routeConfig.label || routeConfig.path.split("/")[1]}
-                </Link>
-              ))}
+              <div css={{ display: "flex" }}>
+                {map(group.routes, (routeConfig: any, key: number) => (
+                  <Link
+                    to={routeConfig.path}
+                    key={key}
+                    css={css([
+                      navItemStyles,
+                      linkStyles,
+                      {
+                        ":hover,:focus": getActiveLinkStyles(theme),
+                      },
+                      routeConfig.path === location.pathname ? getActiveLinkStyles(theme) : {},
+                    ])}
+                  >
+                    {routeConfig.label || routeConfig.path.split("/")[1]}
+                  </Link>
+                ))}
+              </div>
             </section>
           ))}
         </aside>

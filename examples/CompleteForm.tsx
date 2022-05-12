@@ -206,4 +206,5 @@ export function Example() {
 export const config = {
   path: "/complete-form",
   label: "完整表单",
+  order: 2
 };
