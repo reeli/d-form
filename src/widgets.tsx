@@ -31,7 +31,7 @@ const MyCheckbox: FC<MyCheckBoxProps> = forwardRef(({ value, onChange, ...others
 ));
 
 const MyTextField: FC<TextFieldProps & { value: string }> = forwardRef(({ value = "", ...others }, ref) => (
-  <TextField value={value} {...others} ref={ref} />
+  <TextField value={value} {...others} ref={ref} size={"medium"} />
 ));
 
 interface Option<TValue = any> {

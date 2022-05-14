@@ -33,7 +33,7 @@ const App = () => {
         <Global
           styles={css`
             html {
-              font-size: 10px;
+              font-size: 14px;
             }
             body {
               font-family: "Roboto", "Helvetica", "Arial", sans-serif;

@@ -1,6 +1,5 @@
 import { Widget } from "./types";
 import { Field } from "./Field";
-import { Fragment } from "react";
 
 interface FieldListProps {
   widgets: Widget[];
@@ -8,7 +7,7 @@ interface FieldListProps {
 
 const renderFieldList = (widgets: Widget[]) => {
   return (
-    <Fragment>
+    <div css={{ marginTop: 25 }}>
       {widgets.map((widget, idx) => {
         if (widget.type === "array") {
           // TODO
@@ -26,7 +25,7 @@ const renderFieldList = (widgets: Widget[]) => {
 
         return <Field {...widget} key={idx} />;
       })}
-    </Fragment>
+    </div>
   );
 };
 
