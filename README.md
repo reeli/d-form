@@ -1,20 +1,5 @@
-# React UI Components
+# D-Form
+`
 
-## Quick Start
-
-```sh
-npm install
-npm start
-```
-
-## Local
-
-go to [http://localhost:9001](http://localhost:9001)
-
-## To be finished
-
-- drawer
-- modal
-- carousel
-- photo gallery
-- donut
+## Examples
+Go to [http://localhost:9001](http://localhost:9001) visit the examples
