@@ -6,8 +6,8 @@ import { debounce } from "lodash";
 
 const formSpec: FormSpec = {
   formId: "001",
-  title: "测试表单",
-  description: "简单表单例子（通过 DSL 描述 UI）",
+  title: "简单表单",
+  description: "这是一个测试表单，包含基本表单功能",
   widgets: [
     {
       name: "username",

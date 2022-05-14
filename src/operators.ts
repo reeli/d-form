@@ -13,10 +13,14 @@ const all =
   (...args: any[]) =>
   (_value: FieldValue, _formValue: FormValue) =>
     every(args);
+const max = (num: number) => (value: FieldValue, _formValue: FormValue) => value <= num;
+const min = (num: number) => (value: FieldValue, _formValue: FormValue) => value >= num;
 
 export const operators = {
   lte,
   gte,
+  max,
+  min,
   maxLength,
   minLength,
   required,

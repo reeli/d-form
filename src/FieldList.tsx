@@ -17,7 +17,7 @@ const renderFieldList = (widgets: Widget[]) => {
         if (widget.type === "group") {
           return (
             <div key={idx} css={{ padding: 10, marginBottom: 25 }}>
-              <h3>{widget.section.title}</h3>
+              <h4 css={{ margin: 0, color: "#555" }}>{widget.section.title}</h4>
               <div>{renderFieldList(widget.section.widgets)}</div>
             </div>
           );
