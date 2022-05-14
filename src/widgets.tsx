@@ -56,11 +56,15 @@ const MyNumberInput: FC<TextFieldProps & { value: number }> = forwardRef(({ valu
   <TextField type={"number"} label={label} value={value} {...others} ref={ref} />
 ));
 
-export const widgetComponents = {
+const formComponents = {
   text: MyTextField,
   select: MySelect,
   checkbox: MyCheckbox,
   number: MyNumberInput,
+};
+
+export const widgetComponents = {
+  ...formComponents,
   submit: MyButton,
   formLabel: FormLabel,
 };
