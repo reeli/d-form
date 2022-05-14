@@ -95,8 +95,8 @@ const formSpec: FormSpec = {
                 errorMsg: "年龄为必填项",
               },
               {
-                rule: ["max", 18],
-                errorMsg: "当性别为女性时，年龄不能超过 18 岁",
+                rule: ["max", 20],
+                errorMsg: "当性别为女性时，年龄不能超过 20 岁",
                 when: ["eq", ["get", "gender"], "female"],
               },
               {
