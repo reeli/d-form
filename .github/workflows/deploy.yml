@@ -19,14 +19,15 @@ jobs:
 
       - name: Install and test
         run: |
-          npm install
-          npm test
+          npm install pnpm -g
+          pnpm install
+          pnpm test
 
       - name: Build
-        run: npm run release
+        run: pnpm release
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
           branch: gh-pages
-          folder: public
+          folder: docs
