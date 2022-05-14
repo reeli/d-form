@@ -1,12 +1,27 @@
-import { createContext, FC } from "react";
-import { ValidateFnList } from "./types";
+import { createContext, FC, PropsWithChildren } from "react";
+import { FormProvider, UseFormReturn } from "react-hook-form";
+import { Operators } from "./types";
 
-export const FormRenderContext = createContext<{
-  validationFnList: ValidateFnList;
+type FormRenderContextParams = {
+  operators: Operators;
   widgetComponents: { [key: string]: FC<any> };
-}>({
-  validationFnList: {},
-  widgetComponents: {},
-});
+} & UseFormReturn;
 
-export const FormRenderProvider = FormRenderContext.Provider;
+export const FormRenderContext = createContext<FormRenderContextParams>({
+  operators: {},
+  widgetComponents: {},
+  control: {},
+} as FormRenderContextParams);
+
+export const FormRenderProvider: FC<PropsWithChildren<FormRenderContextParams>> = ({
+  children,
+  operators,
+  widgetComponents,
+  ...others
+}) => {
+  return (
+    <FormRenderContext.Provider value={{ operators, widgetComponents, ...others }}>
+      <FormProvider {...others}>{children}</FormProvider>
+    </FormRenderContext.Provider>
+  );
+};

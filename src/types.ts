@@ -128,5 +128,5 @@ export interface Rule {
   errorMsg?: string;
 }
 
-export type ValidateFnCore = (value: FieldValue, formValue: FormValue) => boolean | FieldValue;
-export type ValidateFnList = { [key: string]: (...arg: any[]) => ValidateFnCore };
+export type OperatorCore = (value: FieldValue, formValue: FormValue) => boolean | FieldValue;
+export type Operators = { [key: string]: (...arg: any[]) => OperatorCore };

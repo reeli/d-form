@@ -1,4 +1,4 @@
-import { Controller, useFormContext, useWatch } from "react-hook-form";
+import { Controller, useWatch } from "react-hook-form";
 import { Rule, Widget as TWidget } from "./types";
 import { checkAndParseOperator, parseRules, pickDependentFields } from "./utils";
 import { Fragment, useContext } from "react";
@@ -15,15 +15,14 @@ export const Field = ({
   visible = true,
   ...others
 }: TWidget & { name: string }) => {
-  const { control, getValues, formState } = useFormContext();
-  const { validationFnList, widgetComponents } = useContext(FormRenderContext);
+  const { operators, widgetComponents, control, getValues, formState } = useContext(FormRenderContext);
   const Widget = widgetComponents[widget!];
 
   const formValue = getValues();
   const values = useWatch({
     name: pickDependentFields(visible),
     defaultValue: checkAndParseOperator({
-      fnList: validationFnList,
+      operators,
       data: visible,
       value: formValue[name],
       formValue,
@@ -43,7 +42,7 @@ export const Field = ({
         validate: parseRules({
           rules: rules as Rule[],
           formValue: getValues(),
-          fnList: validationFnList,
+          operators,
         }),
       }}
       control={control}
