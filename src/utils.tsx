@@ -1,4 +1,4 @@
-import { FieldValue, FormValue, Operator, Rule, OperatorCore, Operators } from "./types";
+import { FieldValue, FormValue, Operator, Rule, Operators } from "./types";
 import { Validate } from "react-hook-form";
 
 interface ParseRuleParams {
@@ -28,8 +28,8 @@ export const parseRules = ({ rules, operators, formValue }: ParseRuleParams): Va
 };
 
 export const parseOperator =
-  (operator: Operator, fnList: Operators): OperatorCore =>
-  (value, formValue) => {
+  (operator: Operator, fnList: Operators) =>
+  (value: FieldValue, formValue: FormValue): boolean | FieldValue => {
     const [fnName, ...others] = operator;
     const args: any[] = [];
 

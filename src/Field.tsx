@@ -13,10 +13,12 @@ export const Field = ({
   rules,
   props = {},
   visible = true,
+  label,
   ...others
 }: TWidget & { name: string }) => {
   const { operators, widgetComponents, control, getValues, formState } = useContext(FormRenderContext);
   const Widget = widgetComponents[widget!];
+  const FormLabel = widgetComponents["formLabel"]
 
   const formValue = getValues();
   const values = useWatch({
@@ -53,8 +55,9 @@ export const Field = ({
         }
         return (
           <Fragment>
+            <FormLabel>{label}</FormLabel>
             <Widget {...others} {...props} {...field} value={field.value} />
-            {formState.errors[name]?.message && <div css={{ color: "red" }}>{formState.errors[name].message}</div>}
+            {formState.errors[name]?.message && <FormLabel error>{formState.errors[name].message}</FormLabel>}
           </Fragment>
         );
       }}

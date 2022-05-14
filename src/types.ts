@@ -119,7 +119,7 @@ interface FieldGroup extends BasicInput {
 
 type Arg = Operator | string | number | boolean;
 export type Operator = [item1: string, ...otherItems: Arg[]];
-export type FormValue = any;
+export type FormValue = Record<string, any>;
 export type FieldValue = any;
 
 export interface Rule {

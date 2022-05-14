@@ -7,9 +7,8 @@ import {
   TextFieldProps,
   SelectProps,
   MenuItem,
-  FormControl,
-  InputLabel,
   Checkbox,
+  FormLabel,
 } from "@material-ui/core";
 import { FC, forwardRef } from "react";
 import { FieldValue } from "./types";
@@ -22,25 +21,18 @@ const MyButton: FC<ButtonProps & { text: string }> = forwardRef(({ text, ...othe
   );
 });
 
-const MyCheckbox: FC<SwitchProps & { value: boolean; label: string; onChange: (value: FieldValue) => void }> =
-  forwardRef(({ value, label, onChange, ...others }, ref) => {
-    return (
-      <FormControl fullWidth>
-        <InputLabel>{label}</InputLabel>
-        <div>
-          <Checkbox {...others} checked={value} ref={ref} onChange={(_, checked) => onChange && onChange(checked)} />
-        </div>
-      </FormControl>
-    );
-  });
+type MyCheckBoxProps = Omit<SwitchProps, "checked"> & {
+  value: boolean;
+  onChange: (value: FieldValue) => void;
+};
 
-const MyTextField: FC<TextFieldProps & { value: string }> = forwardRef(({ value = "", label, ...others }, ref) => {
-  return (
-    <FormControl fullWidth>
-      <TextField label={label} value={value} {...others} ref={ref} />
-    </FormControl>
-  );
-});
+const MyCheckbox: FC<MyCheckBoxProps> = forwardRef(({ value, onChange, ...others }, ref) => (
+  <Checkbox {...others} ref={ref} checked={value} onChange={(_, checked) => onChange(checked)} />
+));
+
+const MyTextField: FC<TextFieldProps & { value: string }> = forwardRef(({ value = "", ...others }, ref) => (
+  <TextField value={value} {...others} ref={ref} />
+));
 
 interface Option<TValue = any> {
   id: string;
@@ -49,29 +41,20 @@ interface Option<TValue = any> {
 }
 
 const MySelect: FC<SelectProps & { value: string; options: Option[] }> = forwardRef(
-  ({ value = "", options, label, ...others }, ref) => {
-    return (
-      <FormControl fullWidth>
-        <InputLabel>{label}</InputLabel>
-        <Select value={value} {...others} ref={ref}>
-          {options.map((option) => (
-            <MenuItem value={option.value} key={option.id}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    );
-  },
+  ({ value = "", options, label, ...others }, ref) => (
+    <Select value={value} {...others} ref={ref}>
+      {options.map((option) => (
+        <MenuItem value={option.value} key={option.id}>
+          {option.label}
+        </MenuItem>
+      ))}
+    </Select>
+  ),
 );
 
-const MyNumberInput: FC<TextFieldProps & { value: number }> = forwardRef(({ value, label, ...others }, ref) => {
-  return (
-    <FormControl fullWidth>
-      <TextField type={"number"} label={label} value={value} {...others} ref={ref} />
-    </FormControl>
-  );
-});
+const MyNumberInput: FC<TextFieldProps & { value: number }> = forwardRef(({ value, label, ...others }, ref) => (
+  <TextField type={"number"} label={label} value={value} {...others} ref={ref} />
+));
 
 export const widgetComponents = {
   text: MyTextField,
@@ -79,4 +62,5 @@ export const widgetComponents = {
   checkbox: MyCheckbox,
   number: MyNumberInput,
   submit: MyButton,
+  formLabel: FormLabel,
 };
