@@ -3,11 +3,11 @@ import { Validate } from "react-hook-form";
 
 interface ParseRuleParams {
   rules: Rule[];
-  formValue: FormValue;
   operators: Operators;
+  getValues: () => FormValue;
 }
 
-export const parseRules = ({ rules, operators, formValue }: ParseRuleParams): Validate<FieldValue> => {
+export const parseRules = ({ rules, operators, getValues }: ParseRuleParams): Validate<FieldValue> => {
   return (value: FieldValue) => {
     if (!rules) {
       return undefined;
@@ -16,8 +16,8 @@ export const parseRules = ({ rules, operators, formValue }: ParseRuleParams): Va
     for (let i = 0; i < rules.length; i++) {
       const rule = rules[i];
 
-      if ((rule.when && parseOperator(rule.when, operators)(value, formValue)) || !rule.when) {
-        if (!parseOperator(rule.rule, operators)(value, formValue)) {
+      if ((rule.when && parseOperator(rule.when, operators)(value, getValues())) || !rule.when) {
+        if (!parseOperator(rule.rule, operators)(value, getValues())) {
           return rule.errorMsg;
         }
       }

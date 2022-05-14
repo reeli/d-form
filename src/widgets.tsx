@@ -52,7 +52,7 @@ const MySelect: FC<SelectProps & { value: string; options: Option[] }> = forward
   ),
 );
 
-const MyNumberInput: FC<TextFieldProps & { value: number }> = forwardRef(({ value="", label, ...others }, ref) => (
+const MyNumberInput: FC<TextFieldProps & { value: number }> = forwardRef(({ value = "", label, ...others }, ref) => (
   <TextField type={"number"} label={label} value={value} {...others} ref={ref} />
 ));
 

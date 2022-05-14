@@ -43,7 +43,7 @@ export const Field = ({
       rules={{
         validate: parseRules({
           rules: rules as Rule[],
-          formValue: getValues(),
+          getValues,
           operators,
         }),
       }}
