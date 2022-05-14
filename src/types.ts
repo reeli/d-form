@@ -15,9 +15,17 @@ export interface FormSpec {
   submit: {
     confirmText: string;
   };
+  validateMode?: "change" | "blur" | "submit";
 }
 
-export type Widget = StringInput | NumberInput | DateInput | SelectInput | BooleanInput | FieldArrayInput | FieldGroup;
+export type Widget =
+  | StringWidget
+  | NumberWidget
+  | DateWidget
+  | SelectWidget
+  | BooleanWidget
+  | FieldArrayWidget
+  | FieldGroupWidget;
 
 interface Action {
   type: string;
@@ -33,7 +41,7 @@ export interface AlertAction extends Action {
   message?: string;
 }
 
-interface BasicInput {
+interface BasicWidget {
   name?: string;
   widget?: string;
   label?: string;
@@ -43,7 +51,7 @@ interface BasicInput {
   visible?: Operator | boolean;
 }
 
-export interface StringInput extends BasicInput {
+export interface StringWidget extends BasicWidget {
   name: string;
   type: "string";
   widget: "text" | "textarea";
@@ -56,7 +64,7 @@ export interface StringInput extends BasicInput {
   addonAfter?: string;
 }
 
-interface NumberInput extends BasicInput {
+interface NumberWidget extends BasicWidget {
   name: string;
   type: "number";
   widget: "number" | "currency";
@@ -66,14 +74,14 @@ interface NumberInput extends BasicInput {
   min?: number;
 }
 
-interface BooleanInput extends BasicInput {
+interface BooleanWidget extends BasicWidget {
   name: string;
   type: "boolean";
   widget: "switch" | "toggle" | "checkbox";
   rules?: null;
 }
 
-interface DateInput extends BasicInput {
+interface DateWidget extends BasicWidget {
   name: string;
   type: "date";
   widget: "datepicker" | "rangePicker";
@@ -84,9 +92,9 @@ interface DateInput extends BasicInput {
   min?: string | Operator;
 }
 
-interface SelectInput extends BasicInput {
+interface SelectWidget extends BasicWidget {
   name: string;
-  type: "select";
+  type: "option";
   widget: "select" | "optgroup" | "multiSelect";
   placeholder?: string;
   options: Option[];
@@ -99,7 +107,7 @@ interface Option {
   value: string;
 }
 
-interface FieldArrayInput extends BasicInput {
+interface FieldArrayWidget extends BasicWidget {
   name: string;
   type: "array";
   max: number;
@@ -108,7 +116,7 @@ interface FieldArrayInput extends BasicInput {
   rules: Rule[];
 }
 
-interface FieldGroup extends BasicInput {
+interface FieldGroupWidget extends BasicWidget {
   type: "group";
   section: {
     title: string;
@@ -128,5 +136,5 @@ export interface Rule {
   errorMsg?: string;
 }
 
-export type OperatorCore = (value: FieldValue, formValue: FormValue) => boolean | FieldValue;
+type OperatorCore = (value: FieldValue, formValue: FormValue) => boolean | FieldValue;
 export type Operators = { [key: string]: (...arg: any[]) => OperatorCore };

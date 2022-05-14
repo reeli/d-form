@@ -91,7 +91,7 @@ const formSpec: FormSpec = {
         widgets: [
           {
             name: "hobby",
-            type: "select",
+            type: "option",
             widget: "select",
             label: "爱好",
             placeholder: "请填写爱好",
