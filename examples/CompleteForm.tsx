@@ -184,7 +184,6 @@ export function Example() {
 
   return (
     <div>
-      <h1>完整表单</h1>
       <div css={{ display: "flex" }}>
         <div css={{ flex: 1 }}>
           <Editor
@@ -206,5 +205,5 @@ export function Example() {
 export const config = {
   path: "/complete-form",
   label: "完整表单",
-  order: 2
+  order: 4
 };

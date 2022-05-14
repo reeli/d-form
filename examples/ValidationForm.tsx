@@ -142,7 +142,6 @@ export function Example() {
 
   return (
     <div>
-      <h1>表单校验</h1>
       <div css={{ display: "flex" }}>
         <div css={{ flex: 1 }}>
           <Editor
@@ -164,5 +163,5 @@ export function Example() {
 export const config = {
   path: "/validation-form",
   label: "表单校验",
-  order: 1,
+  order: 2,
 };

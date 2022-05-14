@@ -1,9 +1,9 @@
 import { Controller, useWatch } from "react-hook-form";
 import { Rule, Widget as TWidget } from "./types";
 import { checkAndParseOperator, parseRules, pickDependentFields } from "./utils";
-import { Fragment, useContext } from "react";
+import { useContext } from "react";
 import { FormRenderContext } from "./FormRenderContext";
-import { every } from "lodash";
+import { every, isArray } from "lodash";
 
 export const Field = ({
   name,
@@ -20,18 +20,17 @@ export const Field = ({
   const Widget = widgetComponents[widget!];
   const FormLabel = widgetComponents["formLabel"];
 
-  const formValue = getValues();
-  const values = useWatch({
+  const res = useWatch({
     name: pickDependentFields(visible),
     defaultValue: checkAndParseOperator({
       operators,
       data: visible,
-      value: formValue[name],
-      formValue,
+      value: getValues()[name],
+      formValue: getValues(),
     }),
   });
 
-  const shouldShow = every(values);
+  const shouldShow = isArray(res) ? every(res) : res;
 
   if (!Widget || !shouldShow) {
     return null;
@@ -49,20 +48,15 @@ export const Field = ({
       }}
       control={control}
       defaultValue={defaultValue}
-      render={({ field }) => {
-        if (!shouldShow) {
-          return <Fragment />;
-        }
-        return (
-          <div css={{ marginTop: 8, marginBottom: 8 }}>
-            <FormLabel>{label}</FormLabel>
-            <div>
-              <Widget {...others} {...props} {...field} value={field.value} fullWidth />
-            </div>
-            {formState.errors[name]?.message && <FormLabel error>{formState.errors[name].message}</FormLabel>}
+      render={({ field }) => (
+        <div css={{ marginTop: 8, marginBottom: 8 }}>
+          <FormLabel>{label}</FormLabel>
+          <div>
+            <Widget {...others} {...props} {...field} value={field.value} fullWidth />
           </div>
-        );
-      }}
+          {formState.errors[name]?.message && <FormLabel error>{formState.errors[name].message}</FormLabel>}
+        </div>
+      )}
     />
   );
 };
