@@ -5,7 +5,6 @@ import { routesConfig } from "./getRoutesConfig";
 import { ThemeContext } from "./ThemeContext";
 import { css, Global } from "@emotion/react";
 import { useState } from "react";
-import { Button } from "@material-ui/core";
 import { createRoot } from "react-dom/client";
 
 const containerStyles = css({
@@ -25,7 +24,6 @@ const mainStyles = css({
 
 const App = () => {
   const [theme, setTheme] = useState("dark");
-  const [show, setShow] = useState(true);
 
   return (
     <Router>
@@ -41,23 +39,18 @@ const App = () => {
             }
           `}
         />
-        {show && (
-          <ThemeContext.Provider
-            value={{
-              theme: theme,
-              toggleTheme: () => {
-                setTheme(theme === "light" ? "dark" : "light");
-              },
-            }}
-          >
-            <Nav routesConfig={routesConfig} />
-          </ThemeContext.Provider>
-        )}
+        <ThemeContext.Provider
+          value={{
+            theme: theme,
+            toggleTheme: () => {
+              setTheme(theme === "light" ? "dark" : "light");
+            },
+          }}
+        >
+          <Nav routesConfig={routesConfig} />
+        </ThemeContext.Provider>
         <main css={mainStyles}>
           <Routes>{getRouterRoutes(routesConfig)}</Routes>
-          <div css={{ position: "absolute", left: 0, bottom: 0, zIndex: 2000 }}>
-            <Button onClick={() => setShow((prev) => !prev)}>menu</Button>
-          </div>
         </main>
       </div>
     </Router>
