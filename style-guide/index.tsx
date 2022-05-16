@@ -26,7 +26,7 @@ const App = () => {
   const [theme, setTheme] = useState("dark");
 
   return (
-    <Router>
+    <Router basename={process.env.NODE_ENV === "production" ? "/d-form" : "/"}>
       <div css={containerStyles}>
         <Global
           styles={css`
