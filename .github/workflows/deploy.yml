@@ -26,7 +26,7 @@ jobs:
         run: pnpm release
 
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4
+        uses: JamesIves/github-pages-deploy-action@2.29
         with:
           branch: gh-pages
           folder: public
