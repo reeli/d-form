@@ -19,13 +19,6 @@ const formSpec: FormSpec = {
             type: "string",
             widget: "text",
             label: "用户名",
-            defaultValue: "Rui",
-            rules: [
-              {
-                rule: ["required"],
-                errorMsg: "用户名为必填项",
-              },
-            ],
           },
           {
             name: "password",
@@ -35,16 +28,6 @@ const formSpec: FormSpec = {
             props: {
               type: "password",
             },
-            rules: [
-              {
-                rule: ["required"],
-                errorMsg: "此字段为必填项",
-              },
-              {
-                rule: ["maxLength", 10],
-                errorMsg: "最大长度为 10 个字符",
-              },
-            ],
           },
         ],
       },
@@ -58,32 +41,13 @@ const formSpec: FormSpec = {
             name: "maritalStatus",
             type: "boolean",
             widget: "checkbox",
-            label: "是否已婚",
-            defaultValue: false,
-          },
-          {
-            name: "showMore",
-            type: "boolean",
-            widget: "checkbox",
-            label: "显示更多",
+            label: "是否成年",
             defaultValue: false,
           },
         ],
       },
     },
-    {
-      name: "annualIncome",
-      type: "string",
-      widget: "text",
-      label: "年收入",
-      visible: ["eq", ["get", "showMore"], ["get", "maritalStatus"]],
-      rules: [
-        {
-          rule: ["required"],
-          errorMsg: "此字段为必填项",
-        },
-      ],
-    },
+
     {
       type: "group",
       section: {
@@ -203,7 +167,7 @@ export function Example() {
 }
 
 export const config = {
-  path: "/complete-form",
-  label: "完整表单",
-  order: 4
+  path: "/basic-form",
+  label: "基础控件",
+  order: 4,
 };
