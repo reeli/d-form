@@ -1,9 +1,8 @@
 import { Controller, useWatch } from "react-hook-form";
 import { Rule, Widget as TWidget } from "./types";
 import { checkAndParseOperator, parseRules, pickDependentFields } from "./utils";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { FormRenderContext } from "./FormRenderContext";
-import { every, isArray } from "lodash";
 
 export const Field = ({
   name,
@@ -20,17 +19,22 @@ export const Field = ({
   const Widget = widgetComponents[widget!];
   const FormLabel = widgetComponents["formLabel"];
 
-  const res = useWatch({
-    name: pickDependentFields(visible),
-    defaultValue: checkAndParseOperator({
+  const changed = useWatch({ control, name: pickDependentFields(visible) });
+
+  const [shouldShow, setShouldShow] = useState(
+    checkAndParseOperator({
       operators,
       data: visible,
       value: getValues()[name],
       formValue: getValues(),
     }),
-  });
+  );
 
-  const shouldShow = isArray(res) ? every(res) : res;
+  useEffect(() => {
+    setShouldShow(
+      checkAndParseOperator({ operators, data: visible, value: getValues()[name], formValue: getValues() }),
+    );
+  }, [changed]);
 
   if (!Widget || !shouldShow) {
     return null;

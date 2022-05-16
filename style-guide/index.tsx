@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Navigate, Route } from "react-router-dom";
 import { Nav } from "./components/Nav";
 import { getRouterRoutes } from "./getRouterRoutes";
 import { routesConfig } from "./getRoutesConfig";
@@ -50,7 +50,10 @@ const App = () => {
           <Nav routesConfig={routesConfig} />
         </ThemeContext.Provider>
         <main css={mainStyles}>
-          <Routes>{getRouterRoutes(routesConfig)}</Routes>
+          <Routes>
+            <Route path={"/"} element={<Navigate to={routesConfig[0].path} />} />
+            {getRouterRoutes(routesConfig)}
+          </Routes>
         </main>
       </div>
     </Router>
