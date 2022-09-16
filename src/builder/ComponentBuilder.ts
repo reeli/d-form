@@ -1,9 +1,14 @@
 import {ObjectBuilder} from "./ObjectBuilder";
-import {StringInput} from "../types";
+import {StringInput, SelectInput} from "../types";
+import {ExcludeOptionalProps} from "./type";
 
 export class ComponentBuilder {
-  string() {
-    return ObjectBuilder<StringInput>()
+  string(props: Omit<ExcludeOptionalProps<StringInput>, "type">) {
+    return ObjectBuilder<Omit<StringInput, "type">>(props)
+  }
+
+  select(props: Omit<ExcludeOptionalProps<SelectInput>, "type">){
+    return ObjectBuilder<Omit<SelectInput, "type">>(props)
   }
 }
 
