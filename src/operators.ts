@@ -19,6 +19,7 @@ const all =
     every(args);
 const max = (num: number) => (value: FieldValue, _formValue: FormValue) => value <= num;
 const min = (num: number) => (value: FieldValue, _formValue: FormValue) => value >= num;
+const when = (matched: number)=>(value:FieldValue, _formValue: FormValue)=> matched ? value : null
 
 export const operators = {
   lte,
@@ -31,4 +32,5 @@ export const operators = {
   get: getValue,
   eq,
   all,
+  when
 };
